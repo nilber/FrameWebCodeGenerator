@@ -24,6 +24,7 @@ namespace GeradorFrameweb
         public string visibility { get; set; }
         public bool isAbstract { get; set; }
         public string generalizationSet { get; set; }
+        public string infix { get; set; }
 
         public string getXsiTypeFile()
         {
@@ -93,6 +94,10 @@ namespace GeradorFrameweb
                 case "frameweb:ApplicationModel":
                     new ProcessApplicationModel(config).Execute(this);
                     break;
+                case "frameweb:PersistenceModel":
+                    new ProcessPersistenceModel(config).Execute(this);
+                    break;
+
                 default:
                     break;
             }

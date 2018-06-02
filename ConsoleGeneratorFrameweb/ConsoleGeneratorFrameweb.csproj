@@ -58,6 +58,7 @@
     <Compile Include="ProcessEntityModel.cs" />
     <Compile Include="ProcessApplicationModel.cs" />
     <Compile Include="ComponenteFactory.cs" />
+    <Compile Include="ProcessPersistenceModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

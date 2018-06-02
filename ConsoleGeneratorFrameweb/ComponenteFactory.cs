@@ -63,6 +63,9 @@ namespace GeradorFrameweb
                     case "generalizationSet":
                         filho.generalizationSet = item.Value;
                         break;
+                    case "infix":
+                        filho.infix = item.Value;
+                        break;    
                 }
             }
 

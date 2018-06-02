@@ -1,18 +1,17 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <frameweb:FramewebProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:frameweb="http://nemo.inf.ufes.br/projects/frameweb/FW-2015" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML">
   <compose xsi:type="frameweb:PersistenceModel">
-    <packagedElement xsi:type="frameweb:PersistencePackage" name="sistema.persistence">
-      <packagedElement xsi:type="frameweb:DAOInterface" name="BaseDAO"/>
-      <packagedElement xsi:type="frameweb:DAOClass" name="BaseDAOJPA" powertypeExtent="//@compose.0/sistema.persistence/BaseDAOJPA.1"/>
-      <packagedElement xsi:type="frameweb:DAOClass" name="UsuarioDAOJPA">
-        <generalization xsi:type="frameweb:DAOGeneralization" generalizationSet="//@compose.0/sistema.persistence/BaseDAOJPA.1"/>
-      </packagedElement>
-      <packagedElement xsi:type="frameweb:DAOGeneralizationSet" name="BaseDAOJPA" powertype="//@compose.0/sistema.persistence/BaseDAOJPA" generalization="//@compose.0/sistema.persistence/UsuarioDAOJPA/@generalization.0"/>
-      <packagedElement xsi:type="frameweb:DAORealization" client="//@compose.0/sistema.persistence/BaseDAOJPA" supplier="//@compose.0/sistema.persistence/BaseDAO"/>
+    <packagedElement xsi:type="frameweb:PersistencePackage" name="sistema.persistence" URI="">
+      <packagedElement xsi:type="frameweb:DAOInterface" name="UsuarioDAO" infix="Usuario"/>
+      <packagedElement xsi:type="frameweb:DAOClass" name="UsuarioDAOImpl"/>
+      <packagedElement xsi:type="frameweb:DAORealization" client="//@compose.0/sistema.persistence/UsuarioDAOImpl" supplier="//@compose.0/sistema.persistence/UsuarioDAO" contract="//@compose.0/sistema.persistence/UsuarioDAO"/>
+      <packagedElement xsi:type="frameweb:DAOInterface" name="AlunoDAO" infix="Aluno"/>
+      <packagedElement xsi:type="frameweb:DAOClass" name="AlunoDAOImpl"/>
+      <packagedElement xsi:type="frameweb:DAORealization" name="" client="//@compose.0/sistema.persistence/AlunoDAOImpl" supplier="//@compose.0/sistema.persistence/AlunoDAO" contract="//@compose.0/sistema.persistence/AlunoDAO"/>
     </packagedElement>
   </compose>
   <compose xsi:type="frameweb:EntityModel" name="">
-    <packagedElement xsi:type="frameweb:DomainPackage" name="Entity Package">
+    <packagedElement xsi:type="frameweb:DomainPackage" name="sistema.model">
       <packagedElement xsi:type="frameweb:DomainClass" name="Usuario">
         <ownedAttribute xsi:type="frameweb:DomainAttribute" name="email" visibility="private">
           <type xsi:type="uml:PrimitiveType" href="JAVA.frameweb#//@compose.0/String"/>
