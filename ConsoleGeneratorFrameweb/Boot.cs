@@ -27,17 +27,17 @@ namespace GeradorFrameweb
             }
             catch (Exception)
             {
-                Utilities.Log("Falha ao tentar remover o diretório destino, verifique se há alguém arquivo em uso.");
+                Utilities.Log("Falha ao tentar remover o diretório destino, verifique se há algum arquivo em uso.");
                 return;
             }
 
-            Utilities.Log("Remove build dir");
+            Utilities.Log("Removeu build dir");
+
             Thread.Sleep(2000);
             Directory.CreateDirectory(config.dir_output);
 
             //Now Create all of the directories
-            foreach (string dirPath in Directory.GetDirectories(config.projeto, "*",
-                SearchOption.AllDirectories))
+            foreach (string dirPath in Directory.GetDirectories(config.projeto, "*",  SearchOption.AllDirectories))
                 Directory.CreateDirectory(dirPath.Replace(config.projeto, config.dir_output));
 
             //Copy all the files & Replaces any files with the same name

@@ -6,16 +6,16 @@ namespace GeradorFrameweb
 {
     public class ComponenteFactory
     {
-        public static Componete Create(XmlElement elemento)
+        public static Componet Create(XmlElement elemento)
         {
-            var comp = new Componete();
+            var comp = new Componet();
             comp.tag = elemento.Name;
-            comp.Componentes = new List<Componete>();
+            comp.Components = new List<Componet>();
             AttributeValue(elemento.Attributes, ref comp);
             return comp;
         }
 
-        static void AttributeValue(XmlAttributeCollection itens, ref Componete filho)
+        static void AttributeValue(XmlAttributeCollection itens, ref Componet filho)
         {
             foreach (XmlAttribute item in itens)
             {

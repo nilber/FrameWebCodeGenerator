@@ -15,5 +15,13 @@
     <packagedElement xsi:type="uml:Class" name="List"/>
     <packagedElement xsi:type="uml:Class" name="Set"/>
     <packagedElement xsi:type="uml:Class" name="Date"/>
+    <packagedElement xsi:type="uml:Class" name="Exception"/>
+    <packagedElement xsi:type="frameweb:DomainPackage" name="Entity Package"/>
+    <packagedElement xsi:type="frameweb:DomainPackage" name="Sistema">
+      <packagedElement xsi:type="frameweb:DomainClass" name="Usuario">
+        <ownedAttribute xsi:type="frameweb:DomainAttribute" name="email" visibility="private" type="//@compose.0/String"/>
+        <ownedAttribute xsi:type="frameweb:DomainAttribute" name="senha" visibility="private" type="//@compose.0/String"/>
+      </packagedElement>
+    </packagedElement>
   </compose>
 </frameweb:FramewebProject>

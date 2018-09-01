@@ -45,7 +45,7 @@
         <ownedAttribute xsi:type="frameweb:IOParameter" name="autores" visibility="private">
           <type xsi:type="uml:Class" href="JAVA.frameweb#//@compose.0/List"/>
         </ownedAttribute>
-        <ownedAttribute xsi:type="frameweb:IOParameter" name="autorBO" visibility="private"/>
+        <ownedAttribute xsi:type="frameweb:IOParameter" name="autorBO" visibility="private" type="//@compose.2/br.com.sramos.crudjsf.bo/AutorBO"/>
         <ownedOperation xsi:type="frameweb:FrontControllerMethod" name="salvar"/>
         <ownedOperation xsi:type="frameweb:FrontControllerMethod" name="excluir">
           <ownedParameter name="autor" type="//@compose.1/br.com.sramos.crudjsf.model/Autor"/>
@@ -54,8 +54,8 @@
       <packagedElement xsi:type="frameweb:NavigationGeneralizationSet" name="AbstractController" powertype="//@compose.0/br.com.sramos.crudjsf.controller/AbstractController" generalization="//@compose.0/br.com.sramos.crudjsf.controller/AutorBean/@generalization.0"/>
       <packagedElement xsi:type="frameweb:FrontControllerClass" name="LivroBean">
         <generalization xsi:type="frameweb:NavigationGeneralization" generalizationSet="//@compose.0/br.com.sramos.crudjsf.controller/AbstractController.2"/>
-        <ownedAttribute xsi:type="frameweb:IOParameter" name="livroBO" visibility="private"/>
-        <ownedAttribute xsi:type="frameweb:IOParameter" name="autorBO" visibility="private"/>
+        <ownedAttribute xsi:type="frameweb:IOParameter" name="livroBO" visibility="private" type="//@compose.2/br.com.sramos.crudjsf.bo/LivroBO"/>
+        <ownedAttribute xsi:type="frameweb:IOParameter" name="autorBO" visibility="private" type="//@compose.2/br.com.sramos.crudjsf.bo/AutorBO"/>
         <ownedAttribute xsi:type="frameweb:IOParameter" name="livro" visibility="private" type="//@compose.1/br.com.sramos.crudjsf.model/Livro"/>
         <ownedAttribute xsi:type="frameweb:IOParameter" name="livros" visibility="private">
           <type xsi:type="uml:Class" href="JAVA.frameweb#//@compose.0/List"/>
@@ -92,10 +92,6 @@
       <packagedElement xsi:type="frameweb:NavigationAssociation" memberEnd="//@compose.0/livro/@packagedElement.2/@ownedEnd.0 //@compose.0/livro/cadastro.xhtml/@ownedAttribute.1">
         <ownedEnd xsi:type="frameweb:NavigationCompositionPart" type="//@compose.0/livro/cadastro.xhtml" association="//@compose.0/livro/@packagedElement.2"/>
       </packagedElement>
-    </packagedElement>
-    <packagedElement xsi:type="frameweb:ViewPackage" name="">
-      <packagedElement xsi:type="frameweb:Page" name="index.html"/>
-      <packagedElement xsi:type="frameweb:Page" name="index.xhtml"/>
     </packagedElement>
   </compose>
   <compose xsi:type="frameweb:EntityModel" name="Entity Model">
@@ -136,7 +132,7 @@
     </packagedElement>
   </compose>
   <compose xsi:type="frameweb:PersistenceModel" name="Persistence Model">
-    <packagedElement xsi:type="frameweb:PersistencePackage" name="br.com.sramos.crudjsf.dao"/>
+    <packagedElement xsi:type="frameweb:PersistencePackage" name=" br.com.sramos.crudjsf.dao"/>
     <packagedElement xsi:type="frameweb:PersistencePackage" name="br.com.sramos.crudjsf.dao.impl">
       <packagedElement xsi:type="frameweb:DAOClass" name="LivroJPA">
         <generalization xsi:type="frameweb:DAOGeneralization" generalizationSet="//@compose.2/br.com.sramos.crudjsf.dao.impl/AbstractJPA.1"/>
@@ -151,48 +147,26 @@
       </packagedElement>
       <packagedElement xsi:type="frameweb:DAOGeneralizationSet" name="AbstractJPA" powertype="//@compose.2/br.com.sramos.crudjsf.dao.impl/AbstractJPA" generalization="//@compose.2/br.com.sramos.crudjsf.dao.impl/LivroJPA/@generalization.0"/>
       <packagedElement xsi:type="frameweb:DAOGeneralizationSet" name="AbstractJPA" powertype="//@compose.2/br.com.sramos.crudjsf.dao.impl/AbstractJPA" generalization="//@compose.2/br.com.sramos.crudjsf.dao.impl/AutorJPA/@generalization.0"/>
-      <packagedElement xsi:type="frameweb:DAORealization" client="//@compose.2/br.com.sramos.crudjsf.dao.impl/LivroJPA" supplier="//@compose.2/br.com.sramos.crudjsf.dao.1/LivroDAO"/>
-      <packagedElement xsi:type="frameweb:DAORealization" client="//@compose.2/br.com.sramos.crudjsf.dao.impl/AutorJPA" supplier="//@compose.2/br.com.sramos.crudjsf.dao.1/AutorDAO"/>
+      <packagedElement xsi:type="frameweb:DAORealization" client="//@compose.2/br.com.sramos.crudjsf.dao.impl/LivroJPA" supplier="//@compose.2/br.com.sramos.crudjsf.dao/LivroDAO"/>
+      <packagedElement xsi:type="frameweb:DAORealization" client="//@compose.2/br.com.sramos.crudjsf.dao.impl/AutorJPA" supplier="//@compose.2/br.com.sramos.crudjsf.dao/AutorDAO"/>
+    </packagedElement>
+    <packagedElement xsi:type="frameweb:PersistencePackage" name="br.com.sramos.crudjsf.bo">
+      <packagedElement xsi:type="frameweb:DAOInterface" name="AutorBO"/>
+      <packagedElement xsi:type="frameweb:DAOInterface" name="LivroBO"/>
+    </packagedElement>
+    <packagedElement xsi:type="frameweb:PersistencePackage" name="br.com.sramos.crudjsf.bo.impl">
+      <packagedElement xsi:type="frameweb:DAOClass" name="LivroBOImpl">
+        <ownedAttribute xsi:type="frameweb:DAOAttribute" name="livroDAO"/>
+      </packagedElement>
+      <packagedElement xsi:type="frameweb:DAORealization" client="//@compose.2/br.com.sramos.crudjsf.bo.impl/LivroBOImpl" supplier="//@compose.2/br.com.sramos.crudjsf.bo/AutorBO"/>
+      <packagedElement xsi:type="frameweb:DAOClass" name="AutorBOImpl">
+        <ownedAttribute xsi:type="frameweb:DAOAttribute" name="autorDAO"/>
+      </packagedElement>
+      <packagedElement xsi:type="frameweb:DAORealization" client="//@compose.2/br.com.sramos.crudjsf.bo.impl/AutorBOImpl" supplier="//@compose.2/br.com.sramos.crudjsf.bo/LivroBO"/>
     </packagedElement>
     <packagedElement xsi:type="frameweb:PersistencePackage" name="br.com.sramos.crudjsf.dao">
       <packagedElement xsi:type="frameweb:DAOInterface" name="LivroDAO"/>
       <packagedElement xsi:type="frameweb:DAOInterface" name="AutorDAO"/>
-    </packagedElement>
-  </compose>
-  <compose xsi:type="frameweb:ApplicationModel" name="Application Model">
-    <packagedElement xsi:type="frameweb:ApplicationPackage" name="br.com.sramos.crudjsf.bo">
-      <packagedElement xsi:type="frameweb:ServiceInterface" name="AutorBO"/>
-      <packagedElement xsi:type="frameweb:ServiceInterface" name="LivroBO"/>
-    </packagedElement>
-    <packagedElement xsi:type="frameweb:ApplicationPackage" name="br.com.sramos.crudjsf.bo.impl">
-      <packagedElement xsi:type="frameweb:ServiceClass" name="LivroBOImpl"/>
-      <packagedElement xsi:type="frameweb:DAOServiceAssociation" memberEnd="//@compose.3/br.com.sramos.crudjsf.bo.impl/@packagedElement.1/Source //@compose.3/br.com.sramos.crudjsf.bo.impl/@packagedElement.1/Target">
-        <ownedRule xsi:type="frameweb:DomainConstraints" name="Source Constraint" constrainedElement="//@compose.3/br.com.sramos.crudjsf.bo.impl/@packagedElement.1/Source"/>
-        <ownedRule xsi:type="frameweb:DomainConstraints" name="Target Constraint" constrainedElement="//@compose.3/br.com.sramos.crudjsf.bo.impl/@packagedElement.1/Target"/>
-        <ownedEnd name="Source" type="//@compose.3/br.com.sramos.crudjsf.bo.impl/LivroBOImpl" association="//@compose.3/br.com.sramos.crudjsf.bo.impl/@packagedElement.1"/>
-        <ownedEnd name="Target" association="//@compose.3/br.com.sramos.crudjsf.bo.impl/@packagedElement.1"/>
-      </packagedElement>
-      <packagedElement xsi:type="frameweb:ServiceClass" name="AutorBOImpl"/>
-      <packagedElement xsi:type="frameweb:DAOServiceAssociation" memberEnd="//@compose.3/br.com.sramos.crudjsf.bo.impl/@packagedElement.3/Source //@compose.3/br.com.sramos.crudjsf.bo.impl/@packagedElement.3/Target">
-        <ownedRule xsi:type="frameweb:DomainConstraints" name="Source Constraint" constrainedElement="//@compose.3/br.com.sramos.crudjsf.bo.impl/@packagedElement.3/Source"/>
-        <ownedRule xsi:type="frameweb:DomainConstraints" name="Target Constraint" constrainedElement="//@compose.3/br.com.sramos.crudjsf.bo.impl/@packagedElement.3/Target"/>
-        <ownedEnd name="Source" type="//@compose.3/br.com.sramos.crudjsf.bo.impl/AutorBOImpl" association="//@compose.3/br.com.sramos.crudjsf.bo.impl/@packagedElement.3"/>
-        <ownedEnd name="Target" association="//@compose.3/br.com.sramos.crudjsf.bo.impl/@packagedElement.3"/>
-      </packagedElement>
-      <packagedElement xsi:type="frameweb:ServiceRealization" client="//@compose.3/br.com.sramos.crudjsf.bo.impl/AutorBOImpl" supplier="//@compose.3/br.com.sramos.crudjsf.bo/AutorBO"/>
-      <packagedElement xsi:type="frameweb:ServiceRealization" client="//@compose.3/br.com.sramos.crudjsf.bo.impl/LivroBOImpl" supplier="//@compose.3/br.com.sramos.crudjsf.bo/LivroBO"/>
-      <packagedElement xsi:type="frameweb:DAOServiceAssociation" memberEnd="//@compose.3/br.com.sramos.crudjsf.bo.impl/@packagedElement.6/Source //@compose.3/br.com.sramos.crudjsf.bo.impl/@packagedElement.6/Target">
-        <ownedRule xsi:type="frameweb:DomainConstraints" name="Source Constraint" constrainedElement="//@compose.3/br.com.sramos.crudjsf.bo.impl/@packagedElement.6/Source"/>
-        <ownedRule xsi:type="frameweb:DomainConstraints" name="Target Constraint" constrainedElement="//@compose.3/br.com.sramos.crudjsf.bo.impl/@packagedElement.6/Target"/>
-        <ownedEnd name="Source" type="//@compose.3/br.com.sramos.crudjsf.bo.impl/LivroBOImpl" association="//@compose.3/br.com.sramos.crudjsf.bo.impl/@packagedElement.6"/>
-        <ownedEnd name="Target" type="//@compose.2/br.com.sramos.crudjsf.dao.1/AutorDAO" association="//@compose.3/br.com.sramos.crudjsf.bo.impl/@packagedElement.6"/>
-      </packagedElement>
-      <packagedElement xsi:type="frameweb:DAOServiceAssociation" memberEnd="//@compose.3/br.com.sramos.crudjsf.bo.impl/@packagedElement.7/Source //@compose.3/br.com.sramos.crudjsf.bo.impl/@packagedElement.7/Target">
-        <ownedRule xsi:type="frameweb:DomainConstraints" name="Source Constraint" constrainedElement="//@compose.3/br.com.sramos.crudjsf.bo.impl/@packagedElement.7/Source"/>
-        <ownedRule xsi:type="frameweb:DomainConstraints" name="Target Constraint" constrainedElement="//@compose.3/br.com.sramos.crudjsf.bo.impl/@packagedElement.7/Target"/>
-        <ownedEnd name="Source" type="//@compose.3/br.com.sramos.crudjsf.bo.impl/AutorBOImpl" association="//@compose.3/br.com.sramos.crudjsf.bo.impl/@packagedElement.7"/>
-        <ownedEnd name="Target" type="//@compose.2/br.com.sramos.crudjsf.dao.1/LivroDAO" association="//@compose.3/br.com.sramos.crudjsf.bo.impl/@packagedElement.7"/>
-      </packagedElement>
     </packagedElement>
   </compose>
 </frameweb:FramewebProject>

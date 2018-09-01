@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace GeradorFrameweb
 {
-    public class Componete
+    public class Componet
     {
         public string parameterType { get; set; }
         public string methodType { get; set; }
         public string tag { get; set; }
-        public List<Componete> Componentes { get; set; }
+        public List<Componet> Components { get; set; }
         public string type { get; set; }
         public string name { get; set; }
         public string client { get; set; }
@@ -31,7 +31,7 @@ namespace GeradorFrameweb
             switch (xsi_type)
             {
                 case "frameweb:UIComponentField":
-                    var tag_ui = this.Componentes.Where(x => x.tag == "type").FirstOrDefault();
+                    var tag_ui = this.Components.Where(x => x.tag == "type").FirstOrDefault();
 
                     //var parametros_ui = tag_ui.href.Split('/');
                     //return parametros_ui[parametros_ui.Length - 2] + "\\" + parametros_ui[parametros_ui.Length - 1] + ".txt";
@@ -65,7 +65,7 @@ namespace GeradorFrameweb
                     }
 
                 case "frameweb:Page":
-                    var tag_lib = this.Componentes.Where(x => x.tag == "pageTagLib").FirstOrDefault();
+                    var tag_lib = this.Components.Where(x => x.tag == "pageTagLib").FirstOrDefault();
 
                     if (tag_lib != null)
                     {
@@ -125,9 +125,9 @@ namespace GeradorFrameweb
         {
             var value = string.Empty;
 
-            if(this.Componentes != null)
+            if(this.Components != null)
             {
-                var typeComponent = this.Componentes.Where(x => x.tag == "type").FirstOrDefault();
+                var typeComponent = this.Components.Where(x => x.tag == "type").FirstOrDefault();
                 if(typeComponent != null && !string.IsNullOrWhiteSpace(typeComponent.href))
                 {
                     var _href = typeComponent.href.Split('/');
@@ -140,9 +140,9 @@ namespace GeradorFrameweb
         {
             var value = string.Empty;
 
-            if (this.Componentes != null)
+            if (this.Components != null)
             {
-                var typeComponent = this.Componentes.Where(x => x.tag == "methodType").FirstOrDefault();
+                var typeComponent = this.Components.Where(x => x.tag == "methodType").FirstOrDefault();
                 if (typeComponent != null && !string.IsNullOrWhiteSpace(typeComponent.href))
                 {
                     var _href = typeComponent.href.Split('/');

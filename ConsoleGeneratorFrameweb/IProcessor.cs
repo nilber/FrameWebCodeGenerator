@@ -3,6 +3,6 @@ namespace GeradorFrameweb
 {
     public interface IProcessor
     {
-        void Execute(Componete componente);
+        void Execute(Componet componente);
     }
 }

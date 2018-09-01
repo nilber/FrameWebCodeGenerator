@@ -43,7 +43,7 @@ namespace GeradorFrameweb
 
             foreach (XmlElement ele in xmlDocument.DocumentElement.SelectNodes("compose"))
             {
-                Componete componente = ComponenteFactory.Create(ele);
+                Componet componente = ComponenteFactory.Create(ele);
 
                 foreach (XmlElement sub0 in ele.SelectNodes("packagedElement"))
                 {
@@ -54,21 +54,21 @@ namespace GeradorFrameweb
                         foreach (XmlElement sub1 in sub0.SelectNodes(niv))
                         {
                             var comp1 = ComponenteFactory.Create(sub1);
-                            comp0.Componentes.Add(comp1);
+                            comp0.Components.Add(comp1);
 
                             foreach (var niv2 in nivel_2)
                             {
                                 foreach (XmlElement sub2 in sub1.SelectNodes(niv2))
                                 {
                                     var comp2 = ComponenteFactory.Create(sub2);
-                                    comp1.Componentes.Add(comp2);
+                                    comp1.Components.Add(comp2);
 
                                     foreach (var niv3 in nivel_3)
                                     {
                                         foreach (XmlElement sub3 in sub2.SelectNodes(niv3))
                                         {
                                             var comp3 = ComponenteFactory.Create(sub3);
-                                            comp2.Componentes.Add(comp3);
+                                            comp2.Components.Add(comp3);
                                         }
                                     }
                                 }
@@ -76,7 +76,7 @@ namespace GeradorFrameweb
                         }
                     }
 
-                    componente.Componentes.Add(comp0);
+                    componente.Components.Add(comp0);
                 }
 
                 componente.Process(config);
