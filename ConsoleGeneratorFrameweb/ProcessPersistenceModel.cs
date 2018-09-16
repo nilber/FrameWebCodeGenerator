@@ -14,13 +14,13 @@ namespace GeradorFrameweb
         }
 
 
-        public override void Execute(Componet componente)
+        public override void Execute(Component componente)
         {
             this.CreateInterfaces(componente);
             this.CreateClasses(componente);
         }
 
-        private void CreateClasses(Componet componente)
+        private void CreateClasses(Component componente)
         {
 
             //PersistencePackage
@@ -40,7 +40,12 @@ namespace GeradorFrameweb
                     tags_class.Add("FW_CLASS_NAME", _class.name);
 
 
-                    Componet generalization = _class.Components.Where(x => x.tag == "generalization").FirstOrDefault();
+                    Component generalization = _class.Components.Where(x => x.tag == "generalization").FirstOrDefault();
+
+                    if (_class.isAbstract)
+                        tags_class.Add("FW_CLASS_VISIBILITY", "public abstract");
+                    else
+                        tags_class.Add("FW_CLASS_VISIBILITY", "public");
 
 
                     if (generalization != null)
@@ -58,14 +63,14 @@ namespace GeradorFrameweb
                         tags_class.Add("FW_EXTENDS", string.Empty);
                     }
 
-                    Componet realization = componente.Components.SelectMany(x => x.Components).Where(y => y.xsi_type == "frameweb:DAORealization" && y.getClient() == _class.name).FirstOrDefault();
+                    Component realization = componente.Components.SelectMany(x => x.Components).Where(y => y.xsi_type == "frameweb:DAORealization" && y.getClient() == _class.name).FirstOrDefault();
 
 
                     if (realization != null)
                     {
                         tags_class.Add("FW_IMPLEMENTS", "implements " + realization.getSupplier());
 
-                        Componet daoInterface = componente.Components.SelectMany(x => x.Components).Where(y => y.xsi_type == "frameweb:DAOInterface" && y.name == realization.getSupplier()).FirstOrDefault();
+                        Component daoInterface = componente.Components.SelectMany(x => x.Components).Where(y => y.xsi_type == "frameweb:DAOInterface" && y.name == realization.getSupplier()).FirstOrDefault();
 
                         if (daoInterface != null)
                         {
@@ -85,12 +90,6 @@ namespace GeradorFrameweb
                     if (_class.Components != null)
                     {
 
-                        if (_class.Components.Any(x => x.xsi_type == "frameweb:DAOMethod" && x.isAbstract))
-                            tags_class.Add("FW_CLASS_VISIBILITY", "public abstract");
-                        else
-                            tags_class.Add("FW_CLASS_VISIBILITY", "public");
-
-
                         var _class_propeties = _class.Components.Where(x => x.xsi_type == "frameweb:DAOAttribute").ToList();
 
                         string properties = string.Empty;
@@ -101,6 +100,7 @@ namespace GeradorFrameweb
                             text_parameter = text_parameter.Replace("FW_PARAMETER_FIRST_UPPER", Utilities.FirstCharToUpper(propertie.name));
                             text_parameter = text_parameter.Replace("FW_PARAMETER", propertie.name);
                             text_parameter = text_parameter.Replace("FW_VISIBILITY", propertie.visibility);
+
 
                             properties += text_parameter;
                         }
@@ -125,8 +125,20 @@ namespace GeradorFrameweb
                             }
 
 
-                            text_method = text_method.Replace("FW_METHOD_RETURN_TYPE", method.GetMethodTypeDomainAttribute());
+                            //text_method = text_method.Replace("FW_METHOD_RETURN_TYPE", method.GetMethodTypeDomainAttribute());
+                            //text_method = text_method.Replace("FW_METHOD_NAME", method.name);
+
+                            text_method = text_method.Replace("FW_METHOD_RETURN_TYPE", (string.IsNullOrWhiteSpace(method.GetMethodTypeDomainAttribute())) ? "void" : method.GetMethodTypeDomainAttribute());
                             text_method = text_method.Replace("FW_METHOD_NAME", method.name);
+
+                            if (!string.IsNullOrWhiteSpace(method.methodType))
+                                text_method = text_method.Replace("FW_METHOD_RETURN", "return null;");
+                            else
+                                text_method = text_method.Replace("FW_METHOD_RETURN", string.Empty);
+
+
+                            text_method = text_method.Replace("FW_METHOD_PARAM", method.GetMethodParameter());
+
 
                             methods += text_method;
                         }
@@ -147,7 +159,7 @@ namespace GeradorFrameweb
             }
         }
 
-        private void CreateInterfaces(Componet componente)
+        private void CreateInterfaces(Component componente)
         {
 
             var package_persistences = componente.Components.Where(y => y.xsi_type == "frameweb:PersistencePackage").ToList();

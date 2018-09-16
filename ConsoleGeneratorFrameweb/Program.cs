@@ -40,10 +40,11 @@ namespace GeradorFrameweb
             string[] nivel_1 = new string[] { "resultDependencyConstraint", "packagedElement" };
             string[] nivel_2 = new string[] { "ownedAttribute", "ownedEnd", "pageTagLib", "ownedOperation", "generalization" };
             string[] nivel_3 = new string[] { "type", "methodType", "ownedParameter" };
+            string[] nivel_4 = new string[] { "type", "methodType", "ownedParameter" };
 
             foreach (XmlElement ele in xmlDocument.DocumentElement.SelectNodes("compose"))
             {
-                Componet componente = ComponenteFactory.Create(ele);
+                Component componente = ComponenteFactory.Create(ele);
 
                 foreach (XmlElement sub0 in ele.SelectNodes("packagedElement"))
                 {
@@ -69,6 +70,15 @@ namespace GeradorFrameweb
                                         {
                                             var comp3 = ComponenteFactory.Create(sub3);
                                             comp2.Components.Add(comp3);
+
+                                            foreach (var niv4 in nivel_4)
+                                            {
+                                                foreach (XmlElement sub4 in sub3.SelectNodes(niv4))
+                                                {
+                                                    var comp4 = ComponenteFactory.Create(sub4);
+                                                    comp3.Components.Add(comp4);
+                                                }
+                                            }
                                         }
                                     }
                                 }

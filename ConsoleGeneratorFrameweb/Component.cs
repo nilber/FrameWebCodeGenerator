@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace GeradorFrameweb
 {
-    public class Componet
+    public class Component
     {
         public string parameterType { get; set; }
         public string methodType { get; set; }
         public string tag { get; set; }
-        public List<Componet> Components { get; set; }
+        public List<Component> Components { get; set; }
         public string type { get; set; }
         public string name { get; set; }
         public string client { get; set; }
@@ -105,8 +105,23 @@ namespace GeradorFrameweb
 
         public string getType()
         {
-            var parametros = this.type.Split('/');
-            return parametros[parametros.Length - 1];        
+            if (string.IsNullOrWhiteSpace(this.type))
+            {
+                if(this.Components.Count > 0 && !string.IsNullOrWhiteSpace(this.Components.First().href))
+                {
+                    var _href = this.Components.First().href.Split('/');
+                    return _href[_href.Length - 1];
+                }
+                else
+                {
+                    return "No type";
+                }
+            }
+            else
+            {
+                var parametros = this.type.Split('/');
+                return parametros[parametros.Length - 1];
+            }
         }
 
         internal string getClient()
@@ -150,6 +165,32 @@ namespace GeradorFrameweb
                 }
             }
             return value;
+        }
+
+        internal string GetMethodParameter()
+        {
+            var value = string.Empty;
+
+            if (this.Components != null)
+            {
+                foreach (var parameter in this.Components)
+                {
+                    if (parameter.tag == "ownedParameter" && parameter.Components != null && parameter.Components.Count > 0)
+                    {
+                        var typeComponent = parameter.Components.Where(x => x.tag == "type").FirstOrDefault();
+                        if (typeComponent != null && !string.IsNullOrWhiteSpace(typeComponent.href))
+                        {
+                            var _href = typeComponent.href.Split('/');
+                            value += _href[_href.Length - 1] + " " + parameter.name + ", ";
+                        }
+                    }
+                    else if (parameter.tag == "ownedParameter" && !string.IsNullOrWhiteSpace(parameter.getType()))
+                        value += parameter.getType() + " " + parameter.name + ", ";
+                }
+
+               
+            }
+            return string.IsNullOrWhiteSpace(value) ? value : value.Remove(value.Length - 2);
         }
     }
 }

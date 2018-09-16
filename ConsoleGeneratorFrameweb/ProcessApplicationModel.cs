@@ -12,7 +12,7 @@ namespace GeradorFrameweb
         }
 
 
-        public override void Execute(Componet componente)
+        public override void Execute(Component componente)
         {
 
             /// ApplicationPackage
@@ -26,7 +26,7 @@ namespace GeradorFrameweb
                 var domainClass = package_application.Components.Where(y => y.xsi_type == "frameweb:ServiceClass").ToList();
                 foreach (var _class in domainClass)
                 {
-                    Componet generalization = null;
+                    Component generalization = null;
                     var tags_class = new Dictionary<string, string>();
                     tags_class.Add("FW_CLASS_NAME", _class.name);
 

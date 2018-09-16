@@ -1,5 +1,8 @@
 
 
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+@Column(name = "FW_PARAMETER")
 FW_VISIBILITY FW_PARAMETER_TYPE FW_PARAMETER;
 
 public FW_PARAMETER_TYPE getFW_PARAMETER_FIRST_UPPER(){

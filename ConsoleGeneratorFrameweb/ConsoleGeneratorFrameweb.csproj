@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Componet.cs" />
+    <Compile Include="Component.cs" />
     <Compile Include="Load.cs" />
     <Compile Include="Profile.cs" />
     <Compile Include="Program.cs" />

@@ -11,7 +11,7 @@ namespace GeradorFrameweb
             this.config = _config;
         }
 
-        public abstract void Execute(Componet componente);
+        public abstract void Execute(Component componente);
 
         protected string BuildDirectoryStructures(string path_base, string path)
         {

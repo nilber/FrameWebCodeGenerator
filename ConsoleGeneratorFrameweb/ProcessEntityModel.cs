@@ -14,7 +14,7 @@ namespace GeradorFrameweb
         }
 
 
-        public override void Execute(Componet componente)
+        public override void Execute(Component componente)
         {
 
 
@@ -32,7 +32,7 @@ namespace GeradorFrameweb
 
                 foreach (var _class in domainClass)
                 {
-                    Componet generalization = null;
+                    Component generalization = null;
                     var tags_class = new Dictionary<string, string>();
                     tags_class.Add("FW_CLASS_NAME", _class.name);
 
@@ -61,7 +61,7 @@ namespace GeradorFrameweb
                         }
 
 
-                        var _class_propeties = _class.Components.Where(x => x.xsi_type == "frameweb:DomainAttribute").ToList();
+                        var _class_propeties = _class.Components.Where(x => (new List<string> { "frameweb:DomainAttribute", "frameweb:IdAttribute", "frameweb:DateTimeAttribute" }).Contains(x.xsi_type)).ToList();
 
                         string properties = string.Empty;
                         foreach (var propertie in _class_propeties)
