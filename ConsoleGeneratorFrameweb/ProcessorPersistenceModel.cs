@@ -5,11 +5,11 @@ using System.Linq;
 
 namespace GeradorFrameweb
 {
-    public class ProcessPersistenceModel : Process
+    public class ProcessorPersistenceModel : Processor
     {
 
 
-        public ProcessPersistenceModel(Config _config) : base(_config)
+        public ProcessorPersistenceModel(Config _config) : base(_config)
         {
         }
 
@@ -28,7 +28,7 @@ namespace GeradorFrameweb
             var package_persistences= componente.Components.Where(y => y.xsi_type == "frameweb:PersistencePackage").ToList();
             foreach (var package_persistence in package_persistences)
             {
-                var dir_output_class_package = this.BuildDirectoryStructures(config.dir_output_class, package_persistence.name);
+                var dir_output_class_package = this.BuildDirectoryStructures(Config.dir_output_class, package_persistence.name);
 
 
                 var daoClasses = package_persistence.Components.Where(y => y.xsi_type == "frameweb:DAOClass").ToList();
@@ -95,7 +95,7 @@ namespace GeradorFrameweb
                         string properties = string.Empty;
                         foreach (var propertie in _class_propeties)
                         {
-                            var text_parameter = File.ReadAllText(config.dir_template + config.lang + Path.DirectorySeparatorChar + propertie.getXsiTypeFile());
+                            var text_parameter = File.ReadAllText(Config.dir_template + Config.lang + Path.DirectorySeparatorChar + propertie.getXsiTypeFile());
                             text_parameter = text_parameter.Replace("FW_PARAMETER_TYPE", propertie.GetTypeDomainAttribute());
                             text_parameter = text_parameter.Replace("FW_PARAMETER_FIRST_UPPER", Utilities.FirstCharToUpper(propertie.name));
                             text_parameter = text_parameter.Replace("FW_PARAMETER", propertie.name);
@@ -115,12 +115,12 @@ namespace GeradorFrameweb
                             string text_method;
                             if (method.isAbstract)
                             {
-                                text_method = File.ReadAllText(config.dir_template + config.lang + Path.DirectorySeparatorChar + "Abstract" + method.getXsiTypeFile());
+                                text_method = File.ReadAllText(Config.dir_template + Config.lang + Path.DirectorySeparatorChar + "Abstract" + method.getXsiTypeFile());
                                 text_method = text_method.Replace("FW_METHOD_VISIBILITY", "public abstract");
                             }
                             else
                             {
-                                text_method = File.ReadAllText(config.dir_template + config.lang + Path.DirectorySeparatorChar + method.getXsiTypeFile());
+                                text_method = File.ReadAllText(Config.dir_template + Config.lang + Path.DirectorySeparatorChar + method.getXsiTypeFile());
                                 text_method = text_method.Replace("FW_METHOD_VISIBILITY", "public");
                             }
 
@@ -147,13 +147,13 @@ namespace GeradorFrameweb
 
                     }
 
-                    var text = File.ReadAllText(config.dir_template + config.lang + Path.DirectorySeparatorChar + _class.getXsiTypeFile());
+                    var text = File.ReadAllText(Config.dir_template + Config.lang + Path.DirectorySeparatorChar + _class.getXsiTypeFile());
                     foreach (var item in tags_class)
                     {
                         text = text.Replace(item.Key, item.Value);
                     }
 
-                    File.WriteAllText(Path.Combine(dir_output_class_package, _class.name + config.ext_class), text);
+                    File.WriteAllText(Path.Combine(dir_output_class_package, _class.name + Config.ext_class), text);
 
                 }
             }
@@ -165,7 +165,7 @@ namespace GeradorFrameweb
             var package_persistences = componente.Components.Where(y => y.xsi_type == "frameweb:PersistencePackage").ToList();
             foreach (var package_persistence in package_persistences)
             {
-                var dir_output_class_package = this.BuildDirectoryStructures(config.dir_output_class, package_persistence.name);
+                var dir_output_class_package = this.BuildDirectoryStructures(Config.dir_output_class, package_persistence.name);
 
 
                 var daoInterfaces = package_persistence.Components.Where(y => y.xsi_type == "frameweb:DAOInterface").ToList();
@@ -192,13 +192,13 @@ namespace GeradorFrameweb
 
                         // Gerando arquivos
 
-                        var textInterface = File.ReadAllText(config.dir_template + config.lang + Path.DirectorySeparatorChar + _interface.getXsiTypeFile());
+                        var textInterface = File.ReadAllText(Config.dir_template + Config.lang + Path.DirectorySeparatorChar + _interface.getXsiTypeFile());
                         foreach (var item in tags_class)
                         {
                             textInterface = textInterface.Replace(item.Key, item.Value);
                         }
 
-                        File.WriteAllText(Path.Combine(dir_output_class_package, _interface.name + config.ext_class), textInterface);
+                        File.WriteAllText(Path.Combine(dir_output_class_package, _interface.name + Config.ext_class), textInterface);
 
                     }
 

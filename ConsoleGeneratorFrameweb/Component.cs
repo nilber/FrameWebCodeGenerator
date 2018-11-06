@@ -86,16 +86,16 @@ namespace GeradorFrameweb
             switch (this.xsi_type)
             {
                 case "frameweb:NavigationModel":
-                    new ProcessNavigationModel(config).Execute(this);
+                    new ProcessorNavigationModel(config).Execute(this);
                     break;
                 case "frameweb:EntityModel":
-                    new ProcessEntityModel(config).Execute(this);
+                    new ProcessorEntityModel(config).Execute(this);
                     break;
                 case "frameweb:ApplicationModel":
-                    new ProcessApplicationModel(config).Execute(this);
+                    new ProcessorApplicationModel(config).Execute(this);
                     break;
                 case "frameweb:PersistenceModel":
-                    new ProcessPersistenceModel(config).Execute(this);
+                    new ProcessorPersistenceModel(config).Execute(this);
                     break;
 
                 default:

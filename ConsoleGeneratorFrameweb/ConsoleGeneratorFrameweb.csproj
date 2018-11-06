@@ -52,13 +52,13 @@
     <Compile Include="Utilities.cs" />
     <Compile Include="Boot.cs" />
     <Compile Include="IProcessor.cs" />
-    <Compile Include="ProcessNavigationModel.cs" />
-    <Compile Include="Process.cs" />
+    <Compile Include="ProcessorNavigationModel.cs" />
+    <Compile Include="Processor.cs" />
     <Compile Include="Config.cs" />
-    <Compile Include="ProcessEntityModel.cs" />
-    <Compile Include="ProcessApplicationModel.cs" />
+    <Compile Include="ProcessorEntityModel.cs" />
+    <Compile Include="ProcessorApplicationModel.cs" />
     <Compile Include="ComponenteFactory.cs" />
-    <Compile Include="ProcessPersistenceModel.cs" />
+    <Compile Include="ProcessorPersistenceModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

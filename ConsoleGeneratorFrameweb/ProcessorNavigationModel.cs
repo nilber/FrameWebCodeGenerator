@@ -5,9 +5,9 @@ using System.Linq;
 
 namespace GeradorFrameweb
 {
-    public class ProcessNavigationModel : Process
+    public class ProcessorNavigationModel : Processor
     {
-        public ProcessNavigationModel(Config _config) : base(_config)
+        public ProcessorNavigationModel(Config _config) : base(_config)
         {
         }
 
@@ -19,7 +19,7 @@ namespace GeradorFrameweb
 
             foreach (var package_controller in package_controllers)
             {
-                var dir_output_class_package = this.BuildDirectoryStructures(config.dir_output_class, package_controller.name);
+                var dir_output_class_package = this.BuildDirectoryStructures(Config.dir_output_class, package_controller.name);
                 var class_controllers = package_controller.Components.Where(x => x.xsi_type == "frameweb:FrontControllerClass").ToList();
 
                 foreach (var controller in class_controllers)
@@ -93,7 +93,7 @@ namespace GeradorFrameweb
                     string parameters = string.Empty;
                     foreach (var parameter in controller_parameters)
                     {
-                        var text_parameter = File.ReadAllText(config.dir_template + config.lang + Path.DirectorySeparatorChar + parameter.getXsiTypeFile());
+                        var text_parameter = File.ReadAllText(Config.dir_template + Config.lang + Path.DirectorySeparatorChar + parameter.getXsiTypeFile());
                         text_parameter = text_parameter.Replace("FW_PARAMETER_TYPE", string.IsNullOrWhiteSpace(parameter.parameterType) ? parameter.getType() : parameter.parameterType);
                         text_parameter = text_parameter.Replace("FW_PARAMETER_FIRST_UPPER", Utilities.FirstCharToUpper(parameter.name));
                         text_parameter = text_parameter.Replace("FW_PARAMETER", parameter.name);
@@ -108,7 +108,7 @@ namespace GeradorFrameweb
                     string methods = string.Empty;
                     foreach (var method in controller_methods)
                     {
-                        var text_method = File.ReadAllText(config.dir_template + config.lang + Path.DirectorySeparatorChar + method.getXsiTypeFile());
+                        var text_method = File.ReadAllText(Config.dir_template + Config.lang + Path.DirectorySeparatorChar + method.getXsiTypeFile());
                         text_method = text_method.Replace("FW_METHOD_RETURN_TYPE", (string.IsNullOrWhiteSpace(method.methodType)) ? "void" : method.methodType);
                         text_method = text_method.Replace("FW_METHOD_NAME", method.name);
 
@@ -123,15 +123,15 @@ namespace GeradorFrameweb
                         methods += text_method;
                     }
 
-                    tags_controller.Add("FW_FRONT_CONTROLLER_METHOD", methods);
+                    tags_controller.Add("FW_FRONT_CONTROLLER_METHODS", methods);
 
-                    var text = File.ReadAllText(config.dir_template + config.lang + Path.DirectorySeparatorChar + controller.getXsiTypeFile());
+                    var text = File.ReadAllText(Config.dir_template + Config.lang + Path.DirectorySeparatorChar + controller.getXsiTypeFile());
                     foreach (var item in tags_controller)
                     {
                         text = text.Replace(item.Key, item.Value);
                     }
 
-                    File.WriteAllText(Path.Combine(dir_output_class_package, controller.name + config.ext_class), text);
+                    File.WriteAllText(Path.Combine(dir_output_class_package, controller.name + Config.ext_class), text);
                 }
             }
             /// VIEW
@@ -139,7 +139,7 @@ namespace GeradorFrameweb
             var views = componente.Components.Where(x => x.xsi_type == "frameweb:ViewPackage").ToList();
             foreach (var package_view in views)
             {
-                var dir_output_page = this.BuildDirectoryStructures(config.dir_output_web, package_view.name);
+                var dir_output_page = this.BuildDirectoryStructures(Config.dir_output_web, package_view.name);
 
 
                 var views_pages = package_view.Components.Where(x => x.xsi_type == "frameweb:Page").ToList();
@@ -156,7 +156,7 @@ namespace GeradorFrameweb
                             string body_form = string.Empty;
                             if (comp.xsi_type == "frameweb:UIComponent")// Form
                             {
-                                body_form = File.ReadAllText(config.dir_template + "framework" + Path.DirectorySeparatorChar + comp.getXsiTypeFile());
+                                body_form = File.ReadAllText(Config.dir_template + "framework" + Path.DirectorySeparatorChar + comp.getXsiTypeFile());
                             }
                             string body_form_comp = string.Empty;
                             foreach (var item in comp.Components)
@@ -175,7 +175,7 @@ namespace GeradorFrameweb
                         }
                     }
 
-                    var text = File.ReadAllText(config.dir_template + "framework" + Path.DirectorySeparatorChar + page.getXsiTypeFile());
+                    var text = File.ReadAllText(Config.dir_template + "framework" + Path.DirectorySeparatorChar + page.getXsiTypeFile());
                     text = text.Replace("FW_BODY", body);
 
                     File.WriteAllText(Path.Combine(dir_output_page, page.name), text);
