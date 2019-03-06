@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Use the generator simply and without the need to install additional packages. Only upload your model file.</p>
+    <form method="post" enctype="multipart/form-data" action="UploadFiles">
+
+        <div class="file-upload">
+            <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Model</button>
+
+            <div class="image-upload-wrap">
+                <input class="file-upload-input" type='file' onchange="readURL(this);" id="arquivo" name="arquivo" accept=".frameweb" />
+                <div class="drag-text">
+                    <h3>Drag and drop a file or select add Model</h3>
+                </div>
+            </div>
+            <div class="file-upload-content">
+                <div class="image-title-wrap">
+                    <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+                </div>
+            </div>
+        </div>
+
+        <input class="file-upload-btn" type="submit" style="background: #4540b5" value="Execute" />
+    </form>
+</div>

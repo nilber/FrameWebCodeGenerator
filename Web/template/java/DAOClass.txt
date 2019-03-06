@@ -1,0 +1,21 @@
+package com.frameweb.java;
+
+import java.util.List;
+
+FW_CLASS_VISIBILITY class FW_CLASS_NAME FW_EXTENDS FW_IMPLEMENTS{
+
+	
+FW_CLASS_PARAMETERS
+
+
+FW_CLASS_METHOD
+
+	public FW_CLASS_NAME()
+	{
+		
+	}
+	
+	
+
+}
+
