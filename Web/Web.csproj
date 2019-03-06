@@ -22,4 +22,13 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <None Update="template">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+<ItemGroup>
+<Content Include="template\**" LinkBase="template" CopyToOutputDirectory="Always" />
+<Content Include="profiles\**" LinkBase="profiles" CopyToOutputDirectory="Always" />
+</ItemGroup>
 </Project>
