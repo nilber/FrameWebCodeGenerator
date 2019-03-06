@@ -37,7 +37,17 @@ namespace Web.Controllers
 
             //return Ok(new { count = HttpContext.Request.Form.Files.Count, size, filePath });
 
-            FWStart.Main(filePath);
+            var logfile = "./log.txt";
+            if (!Directory.Exists("build"))
+                Directory.CreateDirectory("build");
+
+            StreamWriter writer = new StreamWriter(logfile);
+
+                Console.SetOut(writer);
+                FWStart.Main(filePath);
+
+           
+            System.IO.File.Move(logfile, "./build/"+ logfile);
 
             string startPath = @"./build";
             string zipPath = Guid.NewGuid() + ".zip";
